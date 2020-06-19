@@ -29,8 +29,22 @@ public class ProjectServiceImpl implements ProjectService {
 		project.setLastModifiedDate(Instant.now());
 		SdlcSystem sdlcSystem = sdlcSystemService.getOrCreateSdlcSystem(project.getSdlcSystem());
 		project.setSdlcSystem(sdlcSystem);
-		Project dbProject = projectRepository.save(project);
-		long count = projectRepository.count();
-		return dbProject;
+		return projectRepository.save(project);
+	}
+
+	public Project updateProject(long projectId, Project project) throws NotFoundException {
+		Project projectFromDB = this.getProject(projectId);
+		if (project.getSdlcSystem() != null) {
+			projectFromDB.setSdlcSystem(sdlcSystemService.getOrCreateSdlcSystem(project.getSdlcSystem()));
+		}
+		if (project.getExternalId() != null) {
+			projectFromDB.setExternalId(project.getExternalId());
+		}
+		if (project.getName() != null) {
+			projectFromDB.setName(project.getName());
+		}
+		projectFromDB.setLastModifiedDate(Instant.now());
+		projectRepository.save(projectFromDB);
+		return projectFromDB;
 	}
 }

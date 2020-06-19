@@ -7,4 +7,5 @@ public interface ProjectService {
 
     Project getProject(long id) throws NotFoundException;
     Project createProject(Project project);
+    Project updateProject(long projectId, Project project) throws NotFoundException;
 }

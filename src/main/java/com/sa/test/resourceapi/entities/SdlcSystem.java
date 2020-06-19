@@ -28,6 +28,7 @@ public class SdlcSystem {
 
     //@NotEmpty
     //@URL
+    //@URLEditor
     @Column(name = "base_url", nullable = false)
     private String baseUrl;
 

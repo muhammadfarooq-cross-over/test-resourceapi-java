@@ -41,4 +41,14 @@ public class ProjectRestController {
 	) {
 		return projectService.createProject(project);
 	}
+
+	@ApiOperation("Update a Project")
+	@PatchMapping(ENDPOINT_ID)
+	public Project updateProject(@ApiParam(name = API_PARAM_ID, required = true)
+									 @PathVariable(PATH_VARIABLE_ID)
+									 final long projectId,
+			@RequestBody Project project
+	) throws NotFoundException {
+		return projectService.updateProject(projectId, project);
+	}
 }
